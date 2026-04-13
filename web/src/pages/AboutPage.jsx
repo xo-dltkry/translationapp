@@ -5,38 +5,40 @@ import { motion } from 'framer-motion';
 import { CheckCircle2, Users, Globe, Shield } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/context/LanguageContext';
 
 function AboutPage() {
+  const { t } = useLanguage();
   const features = [
     {
       icon: Users,
-      title: 'Expert team',
-      description: 'Our translators are native speakers with specialized expertise in legal, technical, and business terminology.',
+      title: t('about.features.teamTitle'),
+      description: t('about.features.teamDescription'),
     },
     {
       icon: Globe,
-      title: 'Multilingual services',
-      description: 'We provide professional translation services across Kazakh, English, and Russian language pairs.',
+      title: t('about.features.multilingualTitle'),
+      description: t('about.features.multilingualDescription'),
     },
     {
       icon: Shield,
-      title: 'Confidentiality guaranteed',
-      description: 'All documents are handled with strict confidentiality protocols and secure data management.',
+      title: t('about.features.confidentialityTitle'),
+      description: t('about.features.confidentialityDescription'),
     },
     {
       icon: CheckCircle2,
-      title: 'Quality assurance',
-      description: 'Every translation undergoes rigorous quality checks and proofreading by senior linguists.',
+      title: t('about.features.qualityTitle'),
+      description: t('about.features.qualityDescription'),
     },
   ];
 
   return (
     <>
       <Helmet>
-        <title>About Us | ALDIS Petrosolutions</title>
+        <title>{t('about.metaTitle')}</title>
         <meta
           name="description"
-          content="Learn about ALDIS Petrosolutions, our expert translation team, and our commitment to delivering accurate, confidential corporate document translation services."
+          content={t('about.metaDescription')}
         />
       </Helmet>
 
@@ -53,20 +55,20 @@ function AboutPage() {
             >
               <div className="text-center mb-16">
                 <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                  About ALDIS Petrosolutions
+                  {t('about.title')}
                 </h1>
                 <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                  We are a professional translation service provider specializing in corporate and legal document translation. With years of experience in the industry, we deliver accurate, reliable, and confidential translation services for businesses operating in Kazakhstan and internationally.
+                  {t('about.intro')}
                 </p>
               </div>
 
               <div className="bg-card rounded-2xl shadow-lg p-8 md:p-12 mb-12">
-                <h2 className="text-2xl md:text-3xl font-semibold mb-6">Our expertise</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold mb-6">{t('about.expertiseTitle')}</h2>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  ALDIS Petrosolutions has built a reputation for excellence in translating complex corporate documents. Our team comprises certified translators with deep knowledge of legal, financial, and technical terminology across multiple industries including energy, finance, manufacturing, and legal services.
+                  {t('about.expertiseText1')}
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  We understand that accurate translation is critical for business operations, legal compliance, and international communication. Our rigorous quality control processes ensure that every document maintains its original meaning, tone, and legal validity across languages.
+                  {t('about.expertiseText2')}
                 </p>
               </div>
 
@@ -96,9 +98,9 @@ function AboutPage() {
               </div>
 
               <div className="bg-primary/5 rounded-2xl p-8 md:p-12 border border-primary/10">
-                <h2 className="text-2xl md:text-3xl font-semibold mb-4">Our commitment</h2>
+                <h2 className="text-2xl md:text-3xl font-semibold mb-4">{t('about.commitmentTitle')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  At ALDIS Petrosolutions, we are committed to delivering translation services that meet the highest professional standards. We combine linguistic expertise with industry knowledge to ensure that your documents are translated accurately, maintaining their legal validity and business impact. Your trust and confidentiality are our top priorities.
+                  {t('about.commitmentText')}
                 </p>
               </div>
             </motion.div>

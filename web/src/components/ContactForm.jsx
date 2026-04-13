@@ -5,8 +5,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { useLanguage } from '@/context/LanguageContext';
 
 function ContactForm() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,23 +22,23 @@ function ContactForm() {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t('contactForm.errors.nameRequired');
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('contactForm.errors.emailRequired');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('contactForm.errors.emailInvalid');
     }
 
     if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
+      newErrors.subject = t('contactForm.errors.subjectRequired');
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = t('contactForm.errors.messageRequired');
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = t('contactForm.errors.messageShort');
     }
 
     setErrors(newErrors);
@@ -61,7 +63,7 @@ function ContactForm() {
     setIsSubmitting(true);
 
     setTimeout(() => {
-      toast('Message sent successfully. We will get back to you soon.');
+      toast(t('contactForm.success'));
       setFormData({ name: '', email: '', subject: '', message: '' });
       setIsSubmitting(false);
     }, 1000);
@@ -70,7 +72,7 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">{t('contactForm.name')}</Label>
         <Input
           id="name"
           name="name"
@@ -78,7 +80,7 @@ function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           className="text-foreground"
-          placeholder="Your full name"
+          placeholder={t('contactForm.namePlaceholder')}
         />
         {errors.name && (
           <p className="text-sm text-destructive">{errors.name}</p>
@@ -86,7 +88,7 @@ function ContactForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t('contactForm.email')}</Label>
         <Input
           id="email"
           name="email"
@@ -94,7 +96,7 @@ function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           className="text-foreground"
-          placeholder="your.email@example.com"
+          placeholder={t('contactForm.emailPlaceholder')}
         />
         {errors.email && (
           <p className="text-sm text-destructive">{errors.email}</p>
@@ -102,7 +104,7 @@ function ContactForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="subject">Subject</Label>
+        <Label htmlFor="subject">{t('contactForm.subject')}</Label>
         <Input
           id="subject"
           name="subject"
@@ -110,7 +112,7 @@ function ContactForm() {
           value={formData.subject}
           onChange={handleChange}
           className="text-foreground"
-          placeholder="What is this regarding?"
+          placeholder={t('contactForm.subjectPlaceholder')}
         />
         {errors.subject && (
           <p className="text-sm text-destructive">{errors.subject}</p>
@@ -118,14 +120,14 @@ function ContactForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="message">Message</Label>
+        <Label htmlFor="message">{t('contactForm.message')}</Label>
         <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
           className="min-h-[150px] text-foreground"
-          placeholder="Tell us more about your translation needs..."
+          placeholder={t('contactForm.messagePlaceholder')}
         />
         {errors.message && (
           <p className="text-sm text-destructive">{errors.message}</p>
@@ -137,7 +139,7 @@ function ContactForm() {
         disabled={isSubmitting}
         className="w-full transition-all duration-200 active:scale-[0.98]"
       >
-        {isSubmitting ? 'Sending...' : 'Send message'}
+        {isSubmitting ? t('contactForm.sending') : t('contactForm.send')}
       </Button>
     </form>
   );

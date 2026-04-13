@@ -2,8 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-muted text-muted-foreground border-t">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -11,30 +14,30 @@ function Footer() {
           <div>
             <span className="text-lg font-bold text-foreground">ALDIS Petrosolutions</span>
             <p className="mt-4 text-sm leading-relaxed">
-              Professional corporate document translation services specializing in contracts, invoices, reports, certificates, and legal documents.
+              {t('footer.description')}
             </p>
           </div>
 
           <div>
-            <span className="text-sm font-semibold text-foreground uppercase tracking-wider">Quick Links</span>
+            <span className="text-sm font-semibold text-foreground uppercase tracking-wider">{t('footer.quickLinks')}</span>
             <nav className="mt-4 flex flex-col space-y-2">
               <Link to="/" className="text-sm hover:text-primary transition-colors duration-200">
-                Home
+                {t('nav.home')}
               </Link>
               <Link to="/translate" className="text-sm hover:text-primary transition-colors duration-200">
-                Translation Tool
+                {t('nav.translationTool')}
               </Link>
               <Link to="/about" className="text-sm hover:text-primary transition-colors duration-200">
-                About
+                {t('nav.about')}
               </Link>
               <Link to="/contact" className="text-sm hover:text-primary transition-colors duration-200">
-                Contact
+                {t('nav.contact')}
               </Link>
             </nav>
           </div>
 
           <div>
-            <span className="text-sm font-semibold text-foreground uppercase tracking-wider">Contact Information</span>
+            <span className="text-sm font-semibold text-foreground uppercase tracking-wider">{t('footer.contactInfo')}</span>
             <div className="mt-4 flex flex-col space-y-3">
               <div className="flex items-start space-x-3">
                 <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
@@ -46,7 +49,7 @@ function Footer() {
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">Almaty, Kazakhstan</span>
+                <span className="text-sm">{t('contact.addressValue')}</span>
               </div>
             </div>
           </div>
@@ -55,14 +58,14 @@ function Footer() {
         <div className="mt-8 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm">
-              © {new Date().getFullYear()} ALDIS Petrosolutions. All rights reserved.
+              © {new Date().getFullYear()} ALDIS Petrosolutions. {t('footer.rights')}
             </p>
             <div className="flex space-x-6">
               <Link to="/privacy" className="text-sm hover:text-primary transition-colors duration-200">
-                Privacy Policy
+                {t('footer.privacy')}
               </Link>
               <Link to="/terms" className="text-sm hover:text-primary transition-colors duration-200">
-                Terms of Service
+                {t('footer.terms')}
               </Link>
             </div>
           </div>

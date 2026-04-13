@@ -10,8 +10,10 @@ import LanguageSelector from './LanguageSelector';
 import TranslationResults from './TranslationResults';
 import apiServerClient from '@/lib/apiServerClient';
 import { toast } from 'sonner';
+import { useLanguage } from '@/context/LanguageContext';
 
 function TranslationForm() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('text');
   const [selectedFile, setSelectedFile] = useState(null);
   const [textInput, setTextInput] = useState('');
@@ -39,12 +41,12 @@ function TranslationForm() {
 
   const handleTranslate = async () => {
     if (activeTab === 'file' && !selectedFile) {
-      toast('Please select a file to translate');
+      toast(t('translationForm.selectFileError'));
       return;
     }
 
     if (activeTab === 'text' && !textInput.trim()) {
-      toast('Please enter text to translate');
+      toast(t('translationForm.enterTextError'));
       return;
     }
 
@@ -70,15 +72,15 @@ function TranslationForm() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Translation failed');
+        throw new Error(errorData.error || t('translationForm.translationFailed'));
       }
 
       const data = await response.json();
       setTranslationResult(data);
-      toast('Translation completed successfully');
+      toast(t('translationForm.translationCompleted'));
     } catch (error) {
       console.error('Translation error:', error);
-      toast('Translation failed. Please try again.');
+      toast(t('translationForm.translationFailed'));
     } finally {
       setIsTranslating(false);
     }
@@ -99,18 +101,18 @@ function TranslationForm() {
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="text">Text input</TabsTrigger>
-          <TabsTrigger value="file">File upload</TabsTrigger>
+          <TabsTrigger value="text">{t('translationForm.textInputTab')}</TabsTrigger>
+          <TabsTrigger value="file">{t('translationForm.fileUploadTab')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="text" className="space-y-4 mt-6">
           <div className="space-y-2">
-            <Label htmlFor="text-input">Enter text to translate</Label>
+            <Label htmlFor="text-input">{t('translationForm.enterText')}</Label>
             <Textarea
               id="text-input"
               value={textInput}
               onChange={(e) => setTextInput(e.target.value)}
-              placeholder="Type or paste your text here..."
+              placeholder={t('translationForm.textPlaceholder')}
               className="min-h-[200px] text-foreground"
             />
           </div>
@@ -134,10 +136,10 @@ function TranslationForm() {
         {isTranslating ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Translating...
+            {t('translationForm.translating')}
           </>
         ) : (
-          'Translate'
+          t('translationForm.translate')
         )}
       </Button>
 

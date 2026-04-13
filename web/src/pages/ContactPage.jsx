@@ -6,31 +6,33 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
+import { useLanguage } from '@/context/LanguageContext';
 
 function ContactPage() {
+  const { t } = useLanguage();
   const contactInfo = [
     {
       icon: Phone,
-      title: 'Phone',
+      title: t('contact.phone'),
       content: '+7 (727) 555-0123',
       link: 'tel:+77275550123',
     },
     {
       icon: Mail,
-      title: 'Email',
+      title: t('contact.email'),
       content: 'info@aldispetro.kz',
       link: 'mailto:info@aldispetro.kz',
     },
     {
       icon: MapPin,
-      title: 'Address',
-      content: 'Almaty, Kazakhstan',
+      title: t('contact.address'),
+      content: t('contact.addressValue'),
       link: null,
     },
     {
       icon: Clock,
-      title: 'Business hours',
-      content: 'Monday - Friday: 9:00 AM - 6:00 PM',
+      title: t('contact.hours'),
+      content: t('contact.hoursValue'),
       link: null,
     },
   ];
@@ -38,10 +40,10 @@ function ContactPage() {
   return (
     <>
       <Helmet>
-        <title>Contact Us | ALDIS Petrosolutions</title>
+        <title>{t('contact.metaTitle')}</title>
         <meta
           name="description"
-          content="Get in touch with ALDIS Petrosolutions for professional translation services. Contact us for quotes, inquiries, or to discuss your translation needs."
+          content={t('contact.metaDescription')}
         />
       </Helmet>
 
@@ -58,10 +60,10 @@ function ContactPage() {
             >
               <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                  Contact us
+                  {t('contact.title')}
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Have questions about our translation services? Get in touch with our team
+                  {t('contact.description')}
                 </p>
               </div>
 
@@ -72,7 +74,7 @@ function ContactPage() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <div className="bg-card rounded-2xl shadow-lg p-8 h-full">
-                    <h2 className="text-2xl font-semibold mb-6">Send us a message</h2>
+                    <h2 className="text-2xl font-semibold mb-6">{t('contact.sendMessage')}</h2>
                     <ContactForm />
                   </div>
                 </motion.div>
@@ -84,7 +86,7 @@ function ContactPage() {
                   className="space-y-6"
                 >
                   <div className="bg-muted/50 rounded-2xl p-8">
-                    <h2 className="text-2xl font-semibold mb-6">Contact information</h2>
+                    <h2 className="text-2xl font-semibold mb-6">{t('contact.contactInformation')}</h2>
                     <div className="space-y-6">
                       {contactInfo.map((item, index) => (
                         <div key={index} className="flex items-start space-x-4">
@@ -110,9 +112,9 @@ function ContactPage() {
                   </div>
 
                   <div className="bg-primary/5 rounded-2xl p-8 border border-primary/10">
-                    <h3 className="text-lg font-semibold mb-3">Need a quote?</h3>
+                    <h3 className="text-lg font-semibold mb-3">{t('contact.needQuote')}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      For translation quotes, please provide details about your document type, language pair, word count, and deadline. We typically respond within 24 hours with a detailed quote and timeline.
+                      {t('contact.quoteDescription')}
                     </p>
                   </div>
                 </motion.div>

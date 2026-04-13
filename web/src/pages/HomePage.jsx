@@ -7,43 +7,45 @@ import { FileText, FileCheck, BarChart3, Award, Scale, ArrowRight } from 'lucide
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/context/LanguageContext';
 
 function HomePage() {
+  const { t } = useLanguage();
   const services = [
     {
       icon: FileText,
-      title: 'Contracts',
-      description: 'Precise translation of business contracts, agreements, and legal documents with attention to terminology and legal nuances.',
+      title: t('home.services.contractsTitle'),
+      description: t('home.services.contractsDescription'),
     },
     {
       icon: FileCheck,
-      title: 'Invoices',
-      description: 'Accurate translation of invoices, receipts, and financial documents maintaining numerical accuracy and formatting.',
+      title: t('home.services.invoicesTitle'),
+      description: t('home.services.invoicesDescription'),
     },
     {
       icon: BarChart3,
-      title: 'Reports',
-      description: 'Professional translation of technical reports, financial statements, and analytical documents for corporate use.',
+      title: t('home.services.reportsTitle'),
+      description: t('home.services.reportsDescription'),
     },
     {
       icon: Award,
-      title: 'Certificates',
-      description: 'Certified translation of diplomas, certificates, licenses, and official documents for legal and administrative purposes.',
+      title: t('home.services.certificatesTitle'),
+      description: t('home.services.certificatesDescription'),
     },
     {
       icon: Scale,
-      title: 'Legal Documents',
-      description: 'Expert translation of court documents, legal correspondence, and regulatory filings with legal terminology expertise.',
+      title: t('home.services.legalTitle'),
+      description: t('home.services.legalDescription'),
     },
   ];
 
   return (
     <>
       <Helmet>
-        <title>Professional Corporate Document Translation Services | ALDIS Petrosolutions</title>
+        <title>{t('home.metaTitle')}</title>
         <meta
           name="description"
-          content="ALDIS Petrosolutions provides professional translation services for contracts, invoices, reports, certificates, and legal documents in Kazakh, English, and Russian."
+          content={t('home.metaDescription')}
         />
       </Helmet>
 
@@ -71,14 +73,14 @@ function HomePage() {
                 className="max-w-3xl"
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                  Professional corporate document translation services
+                  {t('home.title')}
                 </h1>
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-                  ALDIS Petrosolutions delivers expert translation services for contracts, invoices, reports, certificates, and legal documents. Our specialized team ensures accuracy, confidentiality, and industry-specific terminology across Kazakh, English, and Russian languages.
+                  {t('home.description')}
                 </p>
                 <Link to="/translate">
                   <Button size="lg" className="transition-all duration-200 active:scale-[0.98]">
-                    Start translation
+                    {t('home.cta')}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
@@ -96,10 +98,10 @@ function HomePage() {
                 className="text-center mb-16"
               >
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Document translation services
+                  {t('home.servicesTitle')}
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Specialized translation solutions for corporate and legal documentation
+                  {t('home.servicesDescription')}
                 </p>
               </motion.div>
 
@@ -137,7 +139,7 @@ function HomePage() {
               >
                 <Link to="/translate">
                   <Button variant="outline" size="lg" className="transition-all duration-200">
-                    Get started with translation
+                    {t('home.ctaSecondary')}
                   </Button>
                 </Link>
               </motion.div>

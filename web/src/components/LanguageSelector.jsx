@@ -8,19 +8,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useLanguage } from '@/context/LanguageContext';
 
 function LanguageSelector({ selectedPair, onPairChange }) {
+  const { t } = useLanguage();
+
   const languagePairs = [
-    { id: 'kk-ru', source: 'Kazakh', target: 'Russian', sourceCode: 'kk', targetCode: 'ru' },
-    { id: 'ru-kk', source: 'Russian', target: 'Kazakh', sourceCode: 'ru', targetCode: 'kk' },
+    { id: 'kk-ru', source: t('languageSelector.kazakh'), target: t('languageSelector.russian') },
+    { id: 'ru-kk', source: t('languageSelector.russian'), target: t('languageSelector.kazakh') },
   ];
 
   return (
     <div className="space-y-2">
-      <Label className="text-base font-semibold block">Select language pair</Label>
+      <Label className="text-base font-semibold block">{t('translationForm.selectPair')}</Label>
       <Select value={selectedPair} onValueChange={onPairChange}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder="Choose language pair" />
+          <SelectValue placeholder={t('translationForm.choosePair')} />
         </SelectTrigger>
         <SelectContent>
           {languagePairs.map((pair) => (

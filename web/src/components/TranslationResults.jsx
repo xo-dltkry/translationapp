@@ -4,15 +4,17 @@ import { Copy, Download, RotateCcw, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
+import { useLanguage } from '@/context/LanguageContext';
 
 function TranslationResults({ result, onNewTranslation }) {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     if (result.translatedText) {
       await navigator.clipboard.writeText(result.translatedText);
       setCopied(true);
-      toast('Text copied to clipboard');
+      toast(t('results.copiedToast'));
       setTimeout(() => setCopied(false), 2000);
     }
   };
@@ -36,7 +38,7 @@ function TranslationResults({ result, onNewTranslation }) {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      toast('File downloaded successfully');
+      toast(t('results.fileDownloaded'));
     } else if (result.translatedText) {
       const blob = new Blob([result.translatedText], { type: 'text/plain' });
       const url = window.URL.createObjectURL(blob);
@@ -48,7 +50,7 @@ function TranslationResults({ result, onNewTranslation }) {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      toast('Text downloaded as file');
+      toast(t('results.textDownloaded'));
     }
   };
 
@@ -56,7 +58,7 @@ function TranslationResults({ result, onNewTranslation }) {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Translation result</CardTitle>
+          <CardTitle>{t('results.resultTitle')}</CardTitle>
         </CardHeader>
         <CardContent>
           {result.translatedText && (
@@ -69,7 +71,7 @@ function TranslationResults({ result, onNewTranslation }) {
           
           {result.translatedFile && (
             <div className="bg-muted rounded-lg p-6 text-center">
-              <p className="text-sm font-medium mb-2">File translated successfully</p>
+              <p className="text-sm font-medium mb-2">{t('results.fileTranslated')}</p>
               <p className="text-sm text-muted-foreground">{result.fileName}</p>
             </div>
           )}
@@ -86,12 +88,12 @@ function TranslationResults({ result, onNewTranslation }) {
             {copied ? (
               <>
                 <Check className="mr-2 h-4 w-4" />
-                Copied
+                {t('results.copied')}
               </>
             ) : (
               <>
                 <Copy className="mr-2 h-4 w-4" />
-                Copy text
+                {t('results.copyText')}
               </>
             )}
           </Button>
@@ -103,7 +105,7 @@ function TranslationResults({ result, onNewTranslation }) {
           className="transition-all duration-200"
         >
           <Download className="mr-2 h-4 w-4" />
-          Download
+          {t('results.download')}
         </Button>
         
         <Button
@@ -111,7 +113,7 @@ function TranslationResults({ result, onNewTranslation }) {
           className="transition-all duration-200 active:scale-[0.98]"
         >
           <RotateCcw className="mr-2 h-4 w-4" />
-          New translation
+          {t('results.newTranslation')}
         </Button>
       </div>
     </div>

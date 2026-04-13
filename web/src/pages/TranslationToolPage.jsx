@@ -5,15 +5,18 @@ import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TranslationForm from '@/components/TranslationForm';
+import { useLanguage } from '@/context/LanguageContext';
 
 function TranslationToolPage() {
+  const { t } = useLanguage();
+
   return (
     <>
       <Helmet>
-        <title>Translation Tool | ALDIS Petrosolutions</title>
+        <title>{t('translationPage.metaTitle')}</title>
         <meta
           name="description"
-          content="Translate your documents and text between Kazakh, English, and Russian with ALDIS Petrosolutions professional translation tool."
+          content={t('translationPage.metaDescription')}
         />
       </Helmet>
 
@@ -30,10 +33,10 @@ function TranslationToolPage() {
             >
               <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                  Translation tool
+                  {t('translationPage.title')}
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Upload your document or enter text to translate between Kazakh, English, and Russian
+                  {t('translationPage.description')}
                 </p>
               </div>
 

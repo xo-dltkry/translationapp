@@ -3,8 +3,10 @@ import React, { useCallback, useState } from 'react';
 import { Upload, File, X, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useLanguage } from '@/context/LanguageContext';
 
 function DocumentUpload({ onFileSelect, selectedFile, onFileRemove }) {
+  const { t } = useLanguage();
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState('');
 
@@ -19,12 +21,12 @@ function DocumentUpload({ onFileSelect, selectedFile, onFileRemove }) {
 
   const validateFile = (file) => {
     if (!allowedTypes.includes(file.type)) {
-      setError('Unsupported file format. Please upload PDF, Word, image, or text files.');
+      setError(t('documentUpload.unsupportedFile'));
       return false;
     }
 
     if (file.size > maxFileSize) {
-      setError('File size exceeds 10MB limit.');
+      setError(t('documentUpload.fileTooLarge'));
       return false;
     }
 
@@ -102,9 +104,9 @@ function DocumentUpload({ onFileSelect, selectedFile, onFileRemove }) {
             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt"
           />
           <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-          <p className="text-lg font-medium mb-2">Drop your file here or click to browse</p>
+          <p className="text-lg font-medium mb-2">{t('documentUpload.dropFile')}</p>
           <p className="text-sm text-muted-foreground">
-            Supports PDF, Word, and text files up to 10MB
+            {t('documentUpload.supports')}
           </p>
         </div>
       ) : (
