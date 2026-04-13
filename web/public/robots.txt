@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://translate.aldispetro.com/sitemap.xml
